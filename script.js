@@ -16,6 +16,7 @@ songPlaying(songPointer);
 function playSong(p) {
     let song = songs[p];
     song.currentTime = 0;
+    song.volume = 0.4;
     song.play();
     playing = true;
     songPlaying(songPointer);
@@ -117,3 +118,4 @@ progressBar.addEventListener("mousemove", (e) => {
         progress.style.width = `${prog}%`;
     }
 })
+
