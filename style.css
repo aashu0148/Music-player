@@ -10,24 +10,86 @@
 }
 
 body {
-  height: 100vh;
+  height: 100%;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.music-player {
+  padding: 10px;
+  display: flex;
   align-items: center;
 }
 .player {
-  min-width: 300px;
+  width: 300px;
   height: 500px;
   box-shadow: 0 2px 20px var(--third-color);
+}
+.file-list {
+  min-width: 150px;
+  max-width: 250px;
+  height: 450px;
+  margin-left: 10px;
+  overflow-y: scroll;
+}
+.file-list::-webkit-scrollbar {
+  width: 5px;
+}
+.file-list::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: cyan;
+}
+.file-list :last-child {
+  border: none;
+}
+.file-list p {
+  width: 100%;
+  padding: 5px;
+  margin: 10px 0;
+  border-bottom: 1px solid var(--primary-color);
+  font-size: large;
 }
 .player h1 {
   color: var(--primary-color);
   text-align: center;
   padding: 10px;
 }
+
+.player .display-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.display-input input {
+  width: 100px;
+  height: 40px;
+  z-index: 10;
+  opacity: 0;
+  cursor: pointer;
+}
+.display-input input::-webkit-file-upload-button {
+  cursor: pointer;
+}
+.display-input label {
+  position: absolute;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    15deg,
+    var(--primary-color),
+    var(--third-color),
+    var(--primary-color)
+  );
+  color: #fff;
+}
+
 .player .title {
-  margin: 10px 0;
+  padding: 5px;
   width: 100%;
   height: 50px;
   color: var(--secondary-color);
@@ -36,6 +98,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
 .disc::before {
   content: "";
@@ -108,4 +172,10 @@ body {
   width: 10px;
   background: inherit;
   border-radius: 50%;
+}
+
+@media (max-width: 650px) {
+  .music-player {
+    flex-direction: column;
+  }
 }

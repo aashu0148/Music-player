@@ -1,5 +1,8 @@
-const audioElems = document.querySelectorAll("audio");
+// const audioElems = document.querySelectorAll("audio");
+const fileList = document.querySelector(".file-list");
+const fileInput = document.querySelector(".display-input input");
 const player = document.querySelector(".player");
+const title = player.querySelector(".player .title");
 const disc = player.querySelector(".disc");
 const playPause = player.querySelector(".play-pause");
 const prev = player.querySelector(".prev");
@@ -8,10 +11,19 @@ const progressBar = player.querySelector(".progress-bar");
 const progress = player.querySelector(".progress");
 
 const songs = [];
+const songNames = [];
 let songPointer = 0;
-audioElems.forEach(song => songs.push(song));
+// audioElems.forEach(song => songs.push(song));
 let playing = false;
 songPlaying(songPointer);
+// populateFileList(songs);
+
+function populateFileList(songNames) {
+    let html = songNames.map(song => {
+        return `<p>${song}</p>`;
+    }).join(" ");
+    fileList.innerHTML = html;
+}
 
 function playSong(p) {
     let song = songs[p];
@@ -70,17 +82,22 @@ prev.addEventListener("click", () => {
     }, 300)
 })
 playPause.addEventListener("click", () => {
-    if (songs[songPointer].paused) {
-        songs[songPointer].play();
-        playing = true;
-        playPause.classList.replace("fa-play", "fa-pause");
+    if (songs.length == 0) {
+        title.innerText = "Please Select a Song";
+    } else {
+        title.innerText = songNames[songPointer];
+        if (songs[songPointer].paused) {
+            songs[songPointer].play();
+            playing = true;
+            playPause.classList.replace("fa-play", "fa-pause");
+        }
+        else {
+            songs[songPointer].pause();
+            playing = false;
+            playPause.classList.replace("fa-pause", "fa-play");
+        }
+        animateDisc();
     }
-    else {
-        songs[songPointer].pause();
-        playing = false;
-        playPause.classList.replace("fa-pause", "fa-play");
-    }
-    animateDisc();
 })
 
 progressBar.addEventListener("click", (e) => {
@@ -118,4 +135,21 @@ progressBar.addEventListener("mousemove", (e) => {
         progress.style.width = `${prog}%`;
     }
 })
+
+fileInput.addEventListener("change", (e) => {
+    let files = Array.from(e.target.files);
+    files.forEach(file => {
+        let type = file.type;
+        if (type.includes("audio")) {
+            songNames.push(file.name);
+            let url = URL.createObjectURL(file);
+            let audio = document.createElement("audio");
+            audio.src = url;
+            songs.push(audio);
+        }
+    })
+    populateFileList(songNames);
+
+})
+
 

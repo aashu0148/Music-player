@@ -10,28 +10,38 @@
 </head>
 
 <body>
-    <div class="player">
-        <h1>Music Player</h1>
-        <hr>
-        <div class="title">
-            Lorem ipsum dp
+    <div class="music-player">
+        <div class="player">
+            <h1>Music Player</h1>
+            <hr>
+            <div class="display-input">
+                <input type="file" class="file-input" multiple accept=".mp3,wav">
+                <label>Select Songs</label>
+            </div>
+            <div class="title">
+
+            </div>
+            <div class="disc"></div>
+            <div class="options">
+                <div class="prev fa-2x fas fa-backward"></div>
+                <div class="play-pause fa-2x fas fa-play"></div>
+                <div class="next fa-2x fas fa-forward"></div>
+            </div>
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
         </div>
-        <div class="disc"></div>
-        <div class="options">
-            <div class="prev fa-2x fas fa-backward"></div>
-            <div class="play-pause fa-2x fas fa-play"></div>
-            <div class="next fa-2x fas fa-forward"></div>
-        </div>
-        <div class="progress-bar">
-            <div class="progress"></div>
+        <div class="file-list">
+
         </div>
     </div>
-    <audio src="./audios/Bholenath_192(PaglaSongs).mp3"></audio>
-    <audio src="./audios/Alan Walker, Sabrina Carpenter & Farruko - On My Way.mp3"></audio>
-    <audio src="./audios/Bad-Sidhu-Moose-Wala.mp3"></audio>
-    <audio src="./audios/Bawli Tared Song Sumit Goswami.mp3"></audio>
 
-    <script src="./script.js"></script>
+    <audio src="./audios/Bawli Tared Song Sumit Goswami.mp3"></audio>
+    <audio src="./audios/Dino James - Tandav - Ft. Girish Nakod .mp3"></audio>
+    <audio src="./audios/Parindey - Sumit Goswami.mp3"></audio>
+    <audio src="./audios/Qaatal Akhan-(Mr-Jatt.com).mp3"></audio>
+
+    <script type="module" src="./script.js"></script>
 </body>
 
 </html>
