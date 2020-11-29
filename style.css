@@ -33,7 +33,9 @@ body {
   overflow-y: scroll;
 }
 .file-list::-webkit-scrollbar {
+  cursor: pointer !important;
   width: 5px;
+  height: 5px;
 }
 .file-list::-webkit-scrollbar-thumb {
   cursor: pointer;
@@ -43,7 +45,10 @@ body {
   border: none;
 }
 .file-list p {
-  width: 100%;
+  width: fit-content;
+  display: block;
+  max-height: 30px;
+  white-space: nowrap;
   padding: 5px;
   margin: 10px 0;
   border-bottom: 1px solid var(--primary-color);

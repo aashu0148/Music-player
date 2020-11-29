@@ -57,14 +57,6 @@ function trackSong() {
     var timeUpdate = setInterval(handleProgress, 500);
 }
 
-function animateDisc() {
-    if (playing) {
-        disc.classList.add("disc-animate");
-    } else {
-        disc.classList.remove("disc-animate");
-    }
-}
-
 next.addEventListener("click", () => {
     if (songs.length == 0) {
         title.innerText = "Please Select a Song";
