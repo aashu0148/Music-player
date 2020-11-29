@@ -7,11 +7,13 @@ const playPause = player.querySelector(".play-pause");
 const prev = player.querySelector(".prev");
 const next = player.querySelector(".next");
 const progress = player.querySelector(".progress");
+const volumeInput = player.querySelector(".volume");
 
 const songs = [];
 const songNames = [];
 let songPointer = 0;
 let playing = false;
+let volume = 0.5;
 trackSong(songPointer);
 
 function populateFileList(songNames) {
@@ -21,6 +23,7 @@ function populateFileList(songNames) {
     fileList.innerHTML = html;
 }
 function play(pointer) {
+    songs[pointer].volume = volume;
     songs[pointer].play();
     playing = true;
     disc.classList.add("disc-animate");
@@ -118,5 +121,8 @@ fileInput.addEventListener("change", (e) => {
     })
     populateFileList(songNames);
 })
-
+volumeInput.addEventListener("input", () => {
+    volume = volumeInput.value;
+    songs[songPointer].volume = volume;
+})
 
