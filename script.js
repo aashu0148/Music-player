@@ -108,7 +108,7 @@ fileInput.addEventListener("change", (e) => {
     let files = Array.from(e.target.files);
     files.forEach(file => {
         let type = file.type;
-        if (type.includes("audio")||type.includes("mp3")) {
+        if (type.includes("audio") || type.includes("mp3") || type.includes("aac") || type.includes("wav")) {
             songNames.push(file.name);
             let url = URL.createObjectURL(file);
             let audio = document.createElement("audio");
