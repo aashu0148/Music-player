@@ -1,4 +1,3 @@
-// const audioElems = document.querySelectorAll("audio");
 const fileList = document.querySelector(".file-list");
 const fileInput = document.querySelector(".display-input input");
 const player = document.querySelector(".player");
@@ -7,16 +6,13 @@ const disc = player.querySelector(".disc");
 const playPause = player.querySelector(".play-pause");
 const prev = player.querySelector(".prev");
 const next = player.querySelector(".next");
-const progressBar = player.querySelector(".progress-bar");
 const progress = player.querySelector(".progress");
 
 const songs = [];
 const songNames = [];
 let songPointer = 0;
-// audioElems.forEach(song => songs.push(song));
 let playing = false;
-songPlaying(songPointer);
-// populateFileList(songs);
+trackSong(songPointer);
 
 function populateFileList(songNames) {
     let html = songNames.map(song => {
@@ -24,29 +20,38 @@ function populateFileList(songNames) {
     }).join(" ");
     fileList.innerHTML = html;
 }
-
+function play(pointer) {
+    songs[pointer].play();
+    playing = true;
+    disc.classList.add("disc-animate");
+    title.innerText = songNames[pointer];
+    playPause.classList.replace("fa-play", "fa-pause");
+}
+function pause(pointer) {
+    songs[pointer].pause();
+    playing = false;
+    disc.classList.remove("disc-animate");
+    playPause.classList.replace("fa-pause", "fa-play");
+}
 function playSong(p) {
     let song = songs[p];
     song.currentTime = 0;
-    song.volume = 0.4;
-    song.play();
-    playing = true;
-    songPlaying(songPointer);
+    play(p);
 }
 
 function handleProgress() {
     if (!playing) return;
     let song = songs[songPointer];
-    let prog = ((song.currentTime / song.duration) * 100).toFixed(4);
-    progress.style.width = `${prog}%`;
+    let prog = ((song.currentTime / song.duration) * 100).toFixed(1);
+    progress.value = prog;
     if (song.currentTime == song.duration) {
         next.click();
     }
 }
 
-function songPlaying() {
+function trackSong() {
     clearInterval(timeUpdate);
-    var timeUpdate = setInterval(handleProgress, 300);
+    var timeUpdate = setInterval(handleProgress, 500);
 }
 
 function animateDisc() {
@@ -58,81 +63,44 @@ function animateDisc() {
 }
 
 next.addEventListener("click", () => {
-    songs[songPointer].pause();
-    playing = false;
-    animateDisc();
-    if (songPointer < songs.length - 1)
-        ++songPointer;
-    else songPointer = 0;
-    setTimeout(() => {
-        playPause.click();
-        playSong(songPointer);
-    }, 300)
+    if (songs.length == 0) {
+        title.innerText = "Please Select a Song";
+    } else {
+        pause(songPointer);
+        if (songPointer < songs.length - 1)
+            ++songPointer;
+        else songPointer = 0;
+        playSong(songPointer)
+    }
 })
 prev.addEventListener("click", () => {
-    songs[songPointer].pause();
-    playing = false;
-    animateDisc();
-    if (songPointer > 0)
-        --songPointer;
-    else songPointer = songs.length - 1;
-    setTimeout(() => {
-        playPause.click();
-        playSong(songPointer);
-    }, 300)
+    if (songs.length == 0) {
+        title.innerText = "Please Select a Song";
+    } else {
+        pause(songPointer);
+        if (songPointer > 0)
+            --songPointer;
+        else songPointer = songs.length - 1;
+        playSong(songPointer)
+    }
 })
 playPause.addEventListener("click", () => {
     if (songs.length == 0) {
         title.innerText = "Please Select a Song";
     } else {
-        title.innerText = songNames[songPointer];
-        if (songs[songPointer].paused) {
-            songs[songPointer].play();
-            playing = true;
-            playPause.classList.replace("fa-play", "fa-pause");
-        }
-        else {
-            songs[songPointer].pause();
-            playing = false;
-            playPause.classList.replace("fa-pause", "fa-play");
-        }
-        animateDisc();
+        if (songs[songPointer].paused)
+            play(songPointer);
+        else
+            pause(songPointer);
     }
 })
-
-progressBar.addEventListener("click", (e) => {
-    let prog = ((e.offsetX / progressBar.clientWidth) * 100).toFixed(2);
-    let song = songs[songPointer];
-    song.currentTime = (prog / 100) * song.duration;
-    progress.style.width = `${prog}%`;
-
-})
-let progMDown = false;
-progressBar.addEventListener("mousedown", () => {
-    progMDown = true;
-    let song = songs[songPointer];
-    song.pause();
-})
-progressBar.addEventListener("mouseup", () => {
-    progMDown = false;
-    if (playing) {
-        let song = songs[songPointer];
-        song.play();
-    }
-})
-progressBar.addEventListener("mouseleave", () => {
-    if (playing) {
-        let song = songs[songPointer];
-        song.play();
-    }
-    progMDown = false;
-})
-progressBar.addEventListener("mousemove", (e) => {
-    if (progMDown) {
-        let prog = ((e.offsetX / progressBar.clientWidth) * 100).toFixed(2);
+progress.addEventListener("input", () => {
+    if (songs.length == 0) {
+        title.innerText = "Please Select a Song";
+    } else {
+        let prog = progress.value;
         let song = songs[songPointer];
         song.currentTime = (prog / 100) * song.duration;
-        progress.style.width = `${prog}%`;
     }
 })
 

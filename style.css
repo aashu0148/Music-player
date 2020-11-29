@@ -145,33 +145,25 @@ body {
 .options :nth-child(2) {
   color: var(--primary-color) !important;
 }
-.player .progress-bar {
-  width: 80%;
-  height: 5px;
-  margin: 10px auto;
-  background: #fff;
-  box-shadow: 0px 0 10px #acacac;
+
+.player .progress {
+  -webkit-appearance: none;
+  outline: none;
+  height: 8px;
+  width: 200px;
+  margin: auto;
+  display: block;
+  background: var(--secondary-color);
   border-radius: 10px;
   cursor: pointer;
+  overflow: hidden;
 }
-.progress-bar .progress {
-  width: 0%;
-  height: 100%;
-  background: var(--third-color);
-  position: relative;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-}
-.progress-bar .progress::after {
-  content: "";
-  position: absolute;
-  right: 0;
+.player .progress::-webkit-slider-thumb {
+  -webkit-appearance: none;
   height: 10px;
   width: 10px;
-  background: inherit;
-  border-radius: 50%;
+  background: cyan;
+  box-shadow: -200px 0 0 200px var(--third-color);
 }
 
 @media (max-width: 650px) {
