@@ -8,7 +8,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 body {
   height: 100%;
   width: 100%;
@@ -59,7 +58,6 @@ body {
   text-align: center;
   padding: 10px;
 }
-
 .player .display-input {
   display: flex;
   flex-direction: column;
@@ -92,7 +90,6 @@ body {
   );
   color: #fff;
 }
-
 .player .title {
   padding: 5px;
   width: 100%;
@@ -159,7 +156,6 @@ body {
     transform: rotateZ(360deg);
   }
 }
-
 .player .options {
   padding: 20px;
   display: flex;
@@ -173,7 +169,6 @@ body {
 .options :nth-child(2) {
   color: var(--primary-color) !important;
 }
-
 .player .progress {
   -webkit-appearance: none;
   outline: none;
@@ -193,7 +188,6 @@ body {
   background: cyan;
   box-shadow: -200px 0 0 200px var(--third-color);
 }
-
 @media (max-width: 650px) {
   .music-player {
     flex-direction: column;
