@@ -20,6 +20,7 @@ body {
   align-items: center;
 }
 .player {
+  position: relative;
   width: 300px;
   height: 500px;
   box-shadow: 0 2px 20px var(--third-color);
@@ -187,6 +188,21 @@ body {
   width: 10px;
   background: cyan;
   box-shadow: -200px 0 0 200px var(--third-color);
+}
+.player .error::before {
+  content: "Error:";
+  margin: 0 5px;
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+.player .error {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-weight: bolder;
+  color: var(--third-color);
+  opacity: 0;
 }
 @media (max-width: 650px) {
   .music-player {
