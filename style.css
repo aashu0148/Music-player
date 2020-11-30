@@ -203,6 +203,7 @@ body {
   font-weight: bolder;
   color: var(--third-color);
   opacity: 0;
+  transition: 0.5s;
 }
 @media (max-width: 650px) {
   .music-player {

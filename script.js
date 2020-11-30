@@ -57,9 +57,17 @@ function trackSong() {
     var timeUpdate = setInterval(handleProgress, 500);
 }
 
+function showErrorMessage(msg) {
+    errorMessage.style.opacity = 1;
+    errorMessage.innerText = msg;
+    setTimeout(() => {
+        errorMessage.style.opacity = 0;
+    }, 8000);
+}
+
 next.addEventListener("click", () => {
     if (songs.length == 0) {
-        errorMessage.innerText = "No song Selected :/";
+        showErrorMessage("No song Selected :/")
     } else {
         pause(songPointer);
         if (songPointer < songs.length - 1)
@@ -70,8 +78,7 @@ next.addEventListener("click", () => {
 })
 prev.addEventListener("click", () => {
     if (songs.length == 0) {
-        errorMessage.style.opacity = 1;
-        errorMessage.innerText = "No song Selected :/";
+        showErrorMessage("No song Selected :/")
     } else {
         pause(songPointer);
         if (songPointer > 0)
@@ -82,8 +89,7 @@ prev.addEventListener("click", () => {
 })
 playPause.addEventListener("click", () => {
     if (songs.length == 0) {
-        errorMessage.style.opacity = 1;
-        errorMessage.innerText = "No song Selected :/";
+        showErrorMessage("No song Selected :/")
     } else {
         if (songs[songPointer].song.paused)
             play(songPointer);
@@ -93,8 +99,7 @@ playPause.addEventListener("click", () => {
 })
 progress.addEventListener("input", () => {
     if (songs.length == 0) {
-        errorMessage.style.opacity = 1;
-        errorMessage.innerText = "No song Selected :/";
+        showErrorMessage("No song Selected :/")
     } else {
         let prog = progress.value;
         let song = songs[songPointer].song;
@@ -107,8 +112,6 @@ fileInput.addEventListener("change", (e) => {
     files.forEach(file => {
         let type = file.type;
         if (type.includes("audio") || type.includes("mp3") || type.includes("aac") || type.includes("wav")) {
-            errorMessage.innerText = "";
-            errorMessage.style.opacity = 0;
             let url = URL.createObjectURL(file);
             let audio = document.createElement("audio");
             audio.src = url;
@@ -118,8 +121,7 @@ fileInput.addEventListener("change", (e) => {
             };
             songs.push(obj);
         } else {
-            errorMessage.innerText = "Files should be of '.mp3' , '.aac' , '.wav' extensions";
-            errorMessage.style.opacity = 1;
+            showErrorMessage("Files should be of '.mp3' , '.aac' , '.wav' extensions")
         }
     })
     populateFileList(songs);
