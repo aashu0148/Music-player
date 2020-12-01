@@ -163,3 +163,15 @@ shuffleButton.addEventListener("click", () => {
     populateFileList(songs);
 })
 
+
+// nitish code
+
+
+fileList.addEventListener('click', (e) => {
+    if (e.target.matches('p')) {
+        let id = e.target.dataset.id;
+        pause(songPointer);
+        songPointer = id;
+        play(songPointer);
+    }
+})
