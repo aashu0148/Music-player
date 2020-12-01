@@ -159,19 +159,20 @@ repeatButton.addEventListener("click", () => {
 })
 
 shuffleButton.addEventListener("click", () => {
+    pause(songPointer);
     songs.sort(() => Math.random() - 0.5);
+    songPointer = 0;
+    playSong(songPointer);
     populateFileList(songs);
 })
-
-
-// nitish code
-
 
 fileList.addEventListener('click', (e) => {
     if (e.target.matches('p')) {
         let id = e.target.dataset.id;
+        songs[songPointer].currentTime = 0;
         pause(songPointer);
         songPointer = id;
         play(songPointer);
     }
 })
+
