@@ -17,8 +17,8 @@ let volume = 0.5;
 trackSong(songPointer);
 
 function populateFileList(songs) {
-    let html = songs.map(e => {
-        return `<p>${e.name}</p>`;
+    let html = songs.map((e,i) => {
+        return `<p data-id=${i}>${e.name}</p>`;
     }).join(" ");
     fileList.innerHTML = html;
 }
@@ -131,3 +131,15 @@ volumeInput.addEventListener("input", () => {
     songs[songPointer].song.volume = volume;
 })
 
+
+// nitish code
+
+
+fileList.addEventListener('click',(e) => {
+    if(e.target.matches('p')){
+        let id = e.target.dataset.id;
+        pause(songPointer);
+        songPointer=id;
+         play(songPointer); 
+    }
+})
