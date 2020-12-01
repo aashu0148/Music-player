@@ -158,16 +158,43 @@ body {
   }
 }
 .player .options {
-  padding: 20px;
+  width: 100%;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.player .options .main {
+  width: 80%;
+  padding: 10px;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
-.player .options div {
+.player .options .main * {
   cursor: pointer;
   color: var(--secondary-color);
 }
-.options :nth-child(2) {
+.player .options .repeat,
+.player .options .shuffle {
+  cursor: pointer;
+  height: 30px;
+  width: 30px;
+  background-size: cover;
+}
+.player .options .repeat-all {
+  background-image: url("./repeat-all.svg");
+}
+.player .options .repeat-one {
+  background-image: url("./repeat-one.svg");
+}
+.player .options .repeat-none {
+  background-image: url("./repeat-none.svg");
+}
+.player .options .shuffle {
+  background-image: url("./shuffle.svg");
+}
+.options .main :nth-child(2) {
   color: var(--primary-color) !important;
 }
 .player .progress {

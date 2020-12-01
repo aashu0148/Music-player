@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#e60e61">
     <title>Music Player</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
@@ -25,9 +26,13 @@
                 <div class="disc"></div>
             </div>
             <div class="options">
-                <div class="prev fa-2x fas fa-backward"></div>
-                <div class="play-pause fa-2x fas fa-play"></div>
-                <div class="next fa-2x fas fa-forward"></div>
+                <div class="repeat repeat-all"></div>
+                <div class="main">
+                    <div class="prev fa-2x fas fa-backward"></div>
+                    <div class="play-pause fa-2x fas fa-play"></div>
+                    <div class="next fa-2x fas fa-forward"></div>
+                </div>
+                <div class="shuffle"></div>
             </div>
             <input class="progress" type="range" min=0 max=100 step=0.1 value=0>
             <div class="error"></div>

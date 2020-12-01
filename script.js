@@ -9,16 +9,19 @@ const next = player.querySelector(".next");
 const progress = player.querySelector(".progress");
 const volumeInput = player.querySelector(".volume");
 const errorMessage = player.querySelector(".error");
+const repeatButton = player.querySelector(".repeat");
+const shuffleButton = player.querySelector(".shuffle");
 
 const songs = [];
 let songPointer = 0;
 let playing = false;
 let volume = 0.5;
+let repeat = "all";
 trackSong(songPointer);
 
 function populateFileList(songs) {
-    let html = songs.map(e => {
-        return `<p>${e.name}</p>`;
+    let html = songs.map((e, i) => {
+        return `<p data-id=${i}>${e.name}</p>`;
     }).join(" ");
     fileList.innerHTML = html;
 }
@@ -48,7 +51,14 @@ function handleProgress() {
     let prog = ((song.currentTime / song.duration) * 100).toFixed(1);
     progress.value = prog;
     if (song.currentTime == song.duration) {
-        next.click();
+        if (repeat == "all") {
+            next.click();
+        } else if (repeat == "one") {
+            songs[songPointer].currentTime = 0;
+            play(songPointer);
+        } else if (repeat == "none") {
+            pause(songPointer);
+        }
     }
 }
 
@@ -63,6 +73,10 @@ function showErrorMessage(msg) {
     setTimeout(() => {
         errorMessage.style.opacity = 0;
     }, 8000);
+}
+
+function displayRepeat(prevRepeat, repeat) {
+    repeatButton.classList.replace(`repeat-${prevRepeat}`, `repeat-${repeat}`);
 }
 
 next.addEventListener("click", () => {
@@ -129,5 +143,23 @@ fileInput.addEventListener("change", (e) => {
 volumeInput.addEventListener("input", () => {
     volume = volumeInput.value;
     songs[songPointer].song.volume = volume;
+})
+
+repeatButton.addEventListener("click", () => {
+    if (repeat == "all") {
+        repeat = "one";
+        displayRepeat("all", repeat);
+    } else if (repeat == "one") {
+        repeat = "none";
+        displayRepeat("one", repeat);
+    } else if (repeat == "none") {
+        repeat = "all";
+        displayRepeat("none", repeat);
+    }
+})
+
+shuffleButton.addEventListener("click", () => {
+    songs.sort(() => Math.random() - 0.5);
+    populateFileList(songs);
 })
 
