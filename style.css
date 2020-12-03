@@ -55,6 +55,55 @@ body {
   font-size: large;
   cursor: pointer;
 }
+.active-p {
+  background: linear-gradient(
+    234deg,
+    #e60e61,
+    #e60ebc,
+    #e6270e,
+    #e60e61,
+    #e6270e
+  );
+  background-size: 1000% 1000%;
+  color: #fff;
+  -webkit-animation: AnimationName 14s ease infinite;
+  -moz-animation: AnimationName 12s ease infinite;
+  animation: AnimationName 15s ease infinite;
+}
+
+@-webkit-keyframes AnimationName {
+  0% {
+    background-position: 0% 77%;
+  }
+  50% {
+    background-position: 100% 24%;
+  }
+  100% {
+    background-position: 0% 77%;
+  }
+}
+@-moz-keyframes AnimationName {
+  0% {
+    background-position: 0% 77%;
+  }
+  50% {
+    background-position: 100% 24%;
+  }
+  100% {
+    background-position: 0% 77%;
+  }
+}
+@keyframes AnimationName {
+  0% {
+    background-position: 0% 77%;
+  }
+  50% {
+    background-position: 100% 24%;
+  }
+  100% {
+    background-position: 0% 77%;
+  }
+}
 .player h1 {
   color: var(--primary-color);
   text-align: center;

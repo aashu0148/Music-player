@@ -16,11 +16,13 @@ const songs = [];
 let songPointer = 0;
 let playing = false;
 let volume = 0.5;
-let repeat = "all";
+let repeat = "all"; // one,,all,none
 trackSong(songPointer);
 
 function populateFileList(songs) {
     let html = songs.map((e, i) => {
+        if (i == songPointer)
+            return `<p data-id=${i} class="active-p">${e.name}</p>`;
         return `<p data-id=${i}>${e.name}</p>`;
     }).join(" ");
     fileList.innerHTML = html;
@@ -88,6 +90,7 @@ next.addEventListener("click", () => {
             ++songPointer;
         else songPointer = 0;
         playSong(songPointer)
+        populateFileList(songs);
     }
 })
 prev.addEventListener("click", () => {
@@ -99,6 +102,7 @@ prev.addEventListener("click", () => {
             --songPointer;
         else songPointer = songs.length - 1;
         playSong(songPointer)
+        populateFileList(songs);
     }
 })
 playPause.addEventListener("click", () => {
@@ -159,6 +163,7 @@ repeatButton.addEventListener("click", () => {
 })
 
 shuffleButton.addEventListener("click", () => {
+    songs[songPointer].currentTime = 0;
     pause(songPointer);
     songs.sort(() => Math.random() - 0.5);
     songPointer = 0;
@@ -168,11 +173,12 @@ shuffleButton.addEventListener("click", () => {
 
 fileList.addEventListener('click', (e) => {
     if (e.target.matches('p')) {
-        let id = e.target.dataset.id;
         songs[songPointer].currentTime = 0;
+        let id = e.target.dataset.id;
         pause(songPointer);
         songPointer = id;
         play(songPointer);
+        populateFileList(songs);
     }
 })
 
