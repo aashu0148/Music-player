@@ -163,7 +163,7 @@ repeatButton.addEventListener("click", () => {
 })
 
 shuffleButton.addEventListener("click", () => {
-    songs[songPointer].currentTime = 0;
+    songs[songPointer].song.currentTime = 0;
     pause(songPointer);
     songs.sort(() => Math.random() - 0.5);
     songPointer = 0;
@@ -173,7 +173,7 @@ shuffleButton.addEventListener("click", () => {
 
 fileList.addEventListener('click', (e) => {
     if (e.target.matches('p')) {
-        songs[songPointer].currentTime = 0;
+        songs[songPointer].song.currentTime = 0;
         let id = e.target.dataset.id;
         pause(songPointer);
         songPointer = id;
